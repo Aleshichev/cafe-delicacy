@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 # Create your models here.
@@ -5,9 +7,9 @@ from django.db import models
 # An inventory of different Ingredients, their available quantity, and their prices per unit
 class Ingredients(models.Model):
   name = models.CharField(max_length=200)
-  quantity = models.IntegerField(default=0)
+  quantity = models.FloatField(default=0)
   unit = models.CharField(max_length=20)
-  price = models.IntegerField(default=0)
+  unit_price = models.FloatField(default=0)
 
 # A list of the restaurant’s MenuItems, and the price set for each entry
 
@@ -21,10 +23,10 @@ class MenuItems(models.Model):
 class RecipeRequirements(models.Model):
   menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
   ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
-  quantity = models.IntegerField(default=0)
+  quantity = models.FloatField(default=0)
 # A log of all Purchases made at the restaurant
 
 class Purchases(models.Model):
   menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
-  timestamp = models.DateTimeField()
+  timestamp = models.DateTimeField(default=datetime.date.today)
 
