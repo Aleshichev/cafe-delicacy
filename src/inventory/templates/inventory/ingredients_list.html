@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="ingredient">
+  <tr>
+    <th>First</th>
+    <th>Last</th>
+    <th>Phone</th>
+      <th> </th>
+      <th> </th>
+  </tr>
+  {% for ingredient in ingredients_list %}
+  <tr>
+      <td>{{ ingredient.name }}</td>
+      <td>{{ ingredient.quantity }}</td>
+      <td>{{ ingredient.unit }}</td>
+      <td>{{ ingredient.unit_price }}</td>
+      <td><a href=""><button>Edit</button></a></td>
+      <td><a href=""><button>Delete</button></a></td>
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>

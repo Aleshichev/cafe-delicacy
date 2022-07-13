@@ -11,22 +11,25 @@ class Ingredients(models.Model):
   unit = models.CharField(max_length=20)
   unit_price = models.FloatField(default=0)
 
-# A list of the restaurant’s MenuItems, and the price set for each entry
+  def get_absolute_url(self):
+    return "list"
 
-class MenuItems(models.Model):
-  titel = models.CharField(max_length=200)
-  price = models.IntegerField(default=0)
-  # reciperequirements = models.ForeignKey(RecipeRequirements, on_delete=models.CASCADE)
-
-# A list of the ingredients that each menu item requires (RecipeRequirements)
-
-class RecipeRequirements(models.Model):
-  menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
-  ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
-  quantity = models.FloatField(default=0)
-# A log of all Purchases made at the restaurant
-
-class Purchases(models.Model):
-  menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
-  timestamp = models.DateTimeField(default=datetime.date.today)
-
+# # A list of the restaurant’s MenuItems, and the price set for each entry
+#
+# class MenuItems(models.Model):
+#   titel = models.CharField(max_length=200)
+#   price = models.FloatField(default=0)
+#   # reciperequirements = models.ForeignKey(RecipeRequirements, on_delete=models.CASCADE)
+#
+# # A list of the ingredients that each menu item requires (RecipeRequirements)
+#
+# class RecipeRequirements(models.Model):
+#   menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
+#   ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
+#   quantity = models.FloatField(default=0)
+# # A log of all Purchases made at the restaurant
+#
+# class Purchases(models.Model):
+#   menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
+#   timestamp = models.DateTimeField(default=datetime.date.today)
+#
