@@ -3,6 +3,10 @@
 <body>
 <a href="{% url 'home' %}"><h1>Cafe delicacy</h1></a>
 <h3>Welcome to Cafe delicacy {{ name }}!</h3>
+<a href="{% url 'ingredientlist' %}"><p>Ingridients list</p></a>
+<a href="{% url 'ingredientcreate' %}"><p>Create ingridient</p></a>
+<a href="{% url 'menulist' %}"><p>Menu list</p></a>
+<a href="{% url 'menucreate' %}"><p>Create menu</p></a>
     {% block content %}
     {% endblock %}
 </body>

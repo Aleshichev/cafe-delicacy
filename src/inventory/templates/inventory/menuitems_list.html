@@ -3,18 +3,14 @@
 <table id="ingredient">
   <tr>
     <th>Наименоваание</th>
-    <th>Колличество</th>
-    <th>Единицы</th>
     <th>Цена $</th>
       <th> </th>
       <th> </th>
   </tr>
-  {% for ingredient in ingredients_list %}
+  {% for menu in menuitems_list %}
   <tr>
-      <td>{{ ingredient.name }}</td>
-      <td>{{ ingredient.quantity }}</td>
-      <td>{{ ingredient.unit }}</td>
-      <td>{{ ingredient.unit_price }}</td>
+      <td>{{ menu.titel }}</td>
+      <td>{{ menu.price }}</td>
       <td><a href=""><button>Edit</button></a></td>
       <td><a href=""><button>Delete</button></a></td>
   </tr>
