@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from .models import Ingredients, MenuItems
-    # MenuItems, RecipeRequirements, Purchases
+from .models import Ingredients, MenuItems, RecipeRequirements, Purchases
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .forms import IngredientCreateForm, MenuItemsCreateForm
+from .forms import IngredientCreateForm, MenuItemsCreateForm, RecipeRequirementsForm, PurchasesForm
 # Create your views here.
 
 
@@ -26,3 +25,19 @@ class MenuCreate(CreateView):
   model = MenuItems
   template_name = 'inventory/ingredient_create_form.html'
   form_class = MenuItemsCreateForm
+
+class RecipeList(ListView):
+  model = RecipeRequirements
+
+class RecipeCreate(CreateView):
+  model = RecipeRequirements
+  template_name = 'inventory/recipe_create_form.html'
+  form_class = RecipeRequirementsForm
+
+class PurchasesList(ListView):
+  model = Purchases
+
+class PurchasesCreate(CreateView):
+  model = Purchases
+  template_name = 'inventory/purschase_create_form.html'
+  form_class = PurchasesForm

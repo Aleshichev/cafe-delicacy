@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% block content %}
+<table id="ingredient">
+  <tr>
+    <th>Меню</th>
+    <th>Ингредиенты</th>
+    <th>Колличество</th>
+      <th> </th>
+      <th> </th>
+  </tr>
+  {% for recipe in reciperequirements_list %}
+  <tr>
+      <td>{{ recipe.menuitem }}</td>
+      <td>{{ recipe.ingredient }}</td>
+      <td>{{ recipe.quantity }}</td>
+      <td><a href=""><button>Edit</button></a></td>
+      <td><a href=""><button>Delete</button></a></td>
+  </tr>
+  {% endfor %}
+</table>
+  {% endblock %}
