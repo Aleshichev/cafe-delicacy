@@ -46,6 +46,9 @@ class RecipeRequirements(models.Model):
 
   def enough(self):
       return self.quantity <= self.ingredient.quantity
+
+  def __str__(self):
+    return f"{self.menuitem}"
 # # A log of all Purchases made at the restaurant
 #
 class Purchases(models.Model):
@@ -54,4 +57,7 @@ class Purchases(models.Model):
 
   def get_absolute_url(self):
     return "list"
+
+  def __str__(self):
+    return f"{self.menuitem}"
 

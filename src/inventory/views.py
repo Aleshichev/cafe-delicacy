@@ -5,11 +5,11 @@ from django.views.generic.edit import CreateView,  DeleteView, UpdateView
 from django.views.generic import TemplateView
 from .forms import IngredientCreateForm, MenuItemsCreateForm, RecipeRequirementsForm, PurchasesForm
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 
 
-
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
   template_name = "inventory/home.html"
 
   def get_context_data(self, **kwargs):
@@ -24,10 +24,10 @@ class HomeView(TemplateView):
 #     context = {"name": "vegetable"}
 #     return render(request, "inventory/home.html", context)
 
-class IngredientList(ListView):
+class IngredientList(LoginRequiredMixin, ListView):
   model = Ingredients
 
-class IngredientCreate(CreateView):
+class IngredientCreate(LoginRequiredMixin, CreateView):
   model = Ingredients
   template_name = 'inventory/ingredient_create_form.html'
   form_class = IngredientCreateForm
@@ -37,7 +37,7 @@ class IngredientCreate(CreateView):
 #   model = Ingredient
 #   form_class = IngredientForm
 
-class MenuList(ListView):
+class MenuList(LoginRequiredMixin, ListView):
   model = MenuItems
 
 class MenuCreate(CreateView):
@@ -45,15 +45,15 @@ class MenuCreate(CreateView):
   template_name = 'inventory/ingredient_create_form.html'
   form_class = MenuItemsCreateForm
 
-class RecipeList(ListView):
+class RecipeList(LoginRequiredMixin, ListView):
   model = RecipeRequirements
 
-class RecipeCreate(CreateView):
+class RecipeCreate(LoginRequiredMixin, CreateView):
   model = RecipeRequirements
   template_name = 'inventory/recipe_create_form.html'
   form_class = RecipeRequirementsForm
 
-class PurchasesList(ListView):
+class PurchasesList(LoginRequiredMixin, ListView):
   model = Purchases
 
   def get_context_data(self, **kwargs):
@@ -72,7 +72,7 @@ class PurchasesList(ListView):
 
     return context
 
-class PurchasesCreate(CreateView):
+class PurchasesCreate(LoginRequiredMixin, CreateView):
   model = Purchases
   template_name = 'inventory/purschase_create_form.html'
   form_class = PurchasesForm
