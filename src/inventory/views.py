@@ -1,13 +1,16 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from .models import Ingredients, MenuItems, RecipeRequirements, Purchases
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView,  DeleteView, UpdateView
 from django.views.generic import TemplateView
-from .forms import IngredientCreateForm, MenuItemsCreateForm, RecipeRequirementsForm, PurchasesForm
+from .forms import IngredientCreateForm, MenuItemsCreateForm, RecipeRequirementsForm, PurchasesForm, RegisterUserForm
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.urls import reverse_lazy
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -78,9 +81,22 @@ class PurchasesCreate(LoginRequiredMixin, CreateView):
   template_name = 'inventory/purschase_create_form.html'
   form_class = PurchasesForm
 
+class RegisterUser(CreateView):
+  form_class = RegisterUserForm
+  success_url = reverse_lazy("login")
+  template_name = "registration/sign_up.html"
+
+class LoginUser(LoginView):
+  form_class = AuthenticationForm
+  template_name = "registration/login.html"
+
+  def get_success_url(self):
+    return reverse_lazy('home')
 
 def log_out(request):
-    logout(request)
-    return redirect("home")
+  logout(request)
+  return redirect("home")
+
+
 
 

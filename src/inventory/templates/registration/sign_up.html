@@ -1,0 +1,14 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Django Delights -- Sign Up{% endblock %}
+
+{% block content %}
+  <div class="login-form">
+    <h2>Новый пользователь</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="submit-button" type="submit">Регистрация</button>
+    </form>
+  </div>
+{% endblock %}

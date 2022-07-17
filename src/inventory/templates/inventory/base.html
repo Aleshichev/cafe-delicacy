@@ -15,10 +15,11 @@
   <header>
     <div class="header-first-row">
     <a href="{% url 'home' %}"><h1>Cafe delicacy</h1></a>
+
       {% if user.is_authenticated %}
       <a class="logout" href="{% url 'logout' %}">Logout</a>
     </div>
-      <h3>Welcome to Cafe delicacy {{ name }}!</h3>
+      <h3>Welcome to Cafe delicacy {{ user.username }}!</h3>
       <nav class="navbar">
         {% url 'ingredientlist' as ingredients_url %}
         {% url 'menulist' as menulist_url %}
@@ -30,7 +31,9 @@
         <a class="nav-item{% if request.path == recipelist_url %} current-page {% endif %}" href="{% url 'recipelist' %}"><p>Рецепт</p></a>
         <a class="nav-item{% if request.path == purchascreate_url %} current-page {% endif %}" href="{% url 'purchascreate' %}"><p>Заказать</p></a>
         <a class="nav-item{% if request.path == purchaslist_url %} current-page {% endif %}" href="{% url 'purchaslist' %}"><p>Список заказов</p></a>
-     {% endif %}
+        {% else %}
+        <a class="logout" href="{% url 'signup' %}">Зарегистрироваться</a>
+        {% endif %}
       </nav>
   </header>
   <main>
