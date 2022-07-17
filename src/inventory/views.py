@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Ingredients, MenuItems, RecipeRequirements, Purchases
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView,  DeleteView, UpdateView
@@ -7,6 +7,7 @@ from .forms import IngredientCreateForm, MenuItemsCreateForm, RecipeRequirements
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
+from django.contrib.auth import logout
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -76,4 +77,10 @@ class PurchasesCreate(LoginRequiredMixin, CreateView):
   model = Purchases
   template_name = 'inventory/purschase_create_form.html'
   form_class = PurchasesForm
+
+
+def log_out(request):
+    logout(request)
+    return redirect("home")
+
 
