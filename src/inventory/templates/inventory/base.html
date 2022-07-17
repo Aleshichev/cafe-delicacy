@@ -21,13 +21,10 @@
       <h3>Welcome to Cafe delicacy {{ name }}!</h3>
       <nav class="navbar">
         <a href="{% url 'ingredientlist' %}"><p>Ингредиенты</p></a>
-        <a href="{% url 'ingredientcreate' %}"><p>Создать ингридиент</p></a>
         <a href="{% url 'menulist' %}"><p>Меню</p></a>
-        <a href="{% url 'menucreate' %}"><p>Добавить в меню</p></a>
         <a href="{% url 'recipelist' %}"><p>Рецепт</p></a>
-        <a href="{% url 'recipecreate' %}"><p>Создать новый рецепт</p></a>
-        <a href="{% url 'purchaslist' %}"><p>Список покупок</p></a>
-        <a href="{% url 'purchascreate' %}"><p>Новая покупка</p></a>
+        <a href="{% url 'purchascreate' %}"><p>Заказать</p></a>
+        <a href="{% url 'purchaslist' %}"><p>Список заказов</p></a>
       </nav>
   </header>
   <main>

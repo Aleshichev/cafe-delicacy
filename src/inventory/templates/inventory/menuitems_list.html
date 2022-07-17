@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% block content %}
+      <a href="{% url 'menucreate' %}"><p>Новое блюдо</p></a>
 <table id="ingredient">
   <tr>
     <th>Наименоваание</th>
@@ -7,7 +8,7 @@
       <th> </th>
       <th> </th>
   </tr>
-  {% for menu in menuitems_list %}
+  {% for menu in object_list %}
   <tr>
       <td>{{ menu.titel }}</td>
       <td>{{ menu.price }}</td>

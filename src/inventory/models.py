@@ -15,10 +15,11 @@ class Ingredients(models.Model):
     return "list"
 
   def __str__(self):
-    return self.name
+    return f"{self.name} - {self.quantity} - {self.unit} - {self.unit_price}."
 
 # # A list of the restaurant’s MenuItems, and the price set for each entry
-#
+
+
 class MenuItems(models.Model):
   titel = models.CharField(max_length=200, unique=True)
   price = models.FloatField(default=0)
@@ -26,12 +27,15 @@ class MenuItems(models.Model):
   def get_absolute_url(self):
     return "list"
 
+  def available(self):
+    return all(X.enough() for X in self.reciperequirements_set.all())
+
   def __str__(self):
-    # return f"title={self.titel}; price={self.price}"
-    return self.titel
+    return f"{self.titel} - {self.price}$"
 
 # # A list of the ingredients that each menu item requires (RecipeRequirements)
-#
+
+
 class RecipeRequirements(models.Model):
   menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
   ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
@@ -40,6 +44,8 @@ class RecipeRequirements(models.Model):
   def get_absolute_url(self):
     return "list"
 
+  def enough(self):
+      return self.quantity <= self.ingredient.quantity
 # # A log of all Purchases made at the restaurant
 #
 class Purchases(models.Model):
