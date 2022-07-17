@@ -1,16 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
 <head>
+      <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://www.codecademy.com/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="{% static 'inventory/style.css' %}" />
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+  <title>{% block title %}Django Delights{% endblock %}</title>
+  {% block head %}{% endblock %}
 </head>
 <body>
-<a href="{% url 'home' %}"><h1>Cafe delicacy</h1></a>
-<h3>Welcome to Cafe delicacy {{ name }}!</h3>
-<a href="{% url 'ingredientlist' %}"><p>Ingridients list</p></a>
-<a href="{% url 'ingredientcreate' %}"><p>Create ingridient</p></a>
-<a href="{% url 'menulist' %}"><p>Menu list</p></a>
-<a href="{% url 'menucreate' %}"><p>Create menu</p></a>
-<a href="{% url 'recipelist' %}"><p>Recipe list</p></a>
-<a href="{% url 'recipecreate' %}"><p>Create new recipe</p></a>
-<a href="{% url 'purchaslist' %}"><p>purchas list</p></a>
-<a href="{% url 'purchascreate' %}"><p>Purchas create</p></a>
-    {% block content %}
-    {% endblock %}
+  <div class="app">
+  <header>
+    <div class="header-first-row">
+    <a href="{% url 'home' %}"><h1>Cafe delicacy</h1></a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+      <h3>Welcome to Cafe delicacy {{ name }}!</h3>
+      <nav class="navbar">
+        <a href="{% url 'ingredientlist' %}"><p>Ингредиенты</p></a>
+        <a href="{% url 'ingredientcreate' %}"><p>Создать ингридиент</p></a>
+        <a href="{% url 'menulist' %}"><p>Меню</p></a>
+        <a href="{% url 'menucreate' %}"><p>Добавить в меню</p></a>
+        <a href="{% url 'recipelist' %}"><p>Рецепт</p></a>
+        <a href="{% url 'recipecreate' %}"><p>Создать новый рецепт</p></a>
+        <a href="{% url 'purchaslist' %}"><p>Список покупок</p></a>
+        <a href="{% url 'purchascreate' %}"><p>Новая покупка</p></a>
+      </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  </div>
 </body>
+</html>

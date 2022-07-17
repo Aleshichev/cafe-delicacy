@@ -6,7 +6,7 @@ from django.db import models
 
 # An inventory of different Ingredients, their available quantity, and their prices per unit
 class Ingredients(models.Model):
-  name = models.CharField(max_length=200)
+  name = models.CharField(max_length=200, unique=True)
   quantity = models.FloatField(default=0)
   unit = models.CharField(max_length=20)
   unit_price = models.FloatField(default=0)
@@ -20,13 +20,14 @@ class Ingredients(models.Model):
 # # A list of the restaurant’s MenuItems, and the price set for each entry
 #
 class MenuItems(models.Model):
-  titel = models.CharField(max_length=200)
+  titel = models.CharField(max_length=200, unique=True)
   price = models.FloatField(default=0)
 
   def get_absolute_url(self):
     return "list"
 
   def __str__(self):
+    # return f"title={self.titel}; price={self.price}"
     return self.titel
 
 # # A list of the ingredients that each menu item requires (RecipeRequirements)
