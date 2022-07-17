@@ -56,15 +56,6 @@ class RecipeCreate(CreateView):
 class PurchasesList(ListView):
   model = Purchases
 
-class PurchasesCreate(CreateView):
-  model = Purchases
-  template_name = 'inventory/purschase_create_form.html'
-  form_class = PurchasesForm
-
-
-class ReportView(TemplateView):
-  template_name = "inventory/purchases_list2.html"
-
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context["purchases"] = Purchases.objects.all()
@@ -80,3 +71,9 @@ class ReportView(TemplateView):
     context["profit"] = revenue - total_cost
 
     return context
+
+class PurchasesCreate(CreateView):
+  model = Purchases
+  template_name = 'inventory/purschase_create_form.html'
+  form_class = PurchasesForm
+
