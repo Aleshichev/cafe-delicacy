@@ -1,6 +1,7 @@
 {% extends './base.html' %}
 {% block content %}
-        <a href="{% url 'ingredientcreate' %}"><p>Создать ингридиент</p></a>
+ <a href="{% url 'ingredientcreate' %}"><button class="button1" style="width:300px;height:50px">Создать ингридиент</button></a>
+
 <table id="ingredient">
   <tr>
     <th>Наименоваание</th>
@@ -16,8 +17,8 @@
       <td>{{ ingredient.quantity }}</td>
       <td>{{ ingredient.unit }}</td>
       <td>{{ ingredient.unit_price }}</td>
-      <td><a href=""><button>Edit</button></a></td>
-      <td><a href=""><button>Delete</button></a></td>
+      <td><a href="{% url 'update_ingredient' ingredient.pk %}"><button>Обновить</button></a></td>
+      <td><a href="{% url 'ingredientdelete' ingredient.pk %}"><button>Удалить</button></a></td>
   </tr>
   {% endfor %}
 </table>

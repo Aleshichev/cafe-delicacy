@@ -1,0 +1,10 @@
+{% extends 'inventory/base.html' %}
+ 
+{% block content %}
+    <h1>Удаление</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+      <p>Вы действительно хотите удалить  : {{ ingredients.name | upper }} ?</p>
+      <input type="submit" value="Подтвердить" />
+    </form>
+{% endblock content %}

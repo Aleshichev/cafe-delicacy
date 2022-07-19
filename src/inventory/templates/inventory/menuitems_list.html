@@ -1,19 +1,24 @@
 {% extends './base.html' %}
 {% block content %}
-      <a href="{% url 'menucreate' %}"><p>Новое блюдо</p></a>
-<table id="ingredient">
-  <tr>
-    <th>Наименоваание</th>
-    <th>Цена $</th>
-      <th> </th>
-      <th> </th>
-  </tr>
-  {% for menu in object_list %}
-  <tr>
-      <td>{{ menu.titel }}</td>
-      <td>{{ menu.price }}</td>
+  <div>
+            <a href="{% url 'menucreate' %}"><button class="button1" style="width:200px;height:50px">Новое блюдо</button></a>
 
-  </tr>
-  {% endfor %}
-</table>
+            <h2>Меню</h2>
+            <ul class="menu-items">
+            {% for menu_item in menu_items %}
+                <li>
+                    <div class="menu-item-header">
+                        <div class="menu-item-title">{{ menu_item.titel }}</div>
+                        <div class="menu-item-price">${{ menu_item.price|stringformat:".2f" }}</div>
+                    </div>
+                    <ul class="menu-item-ingredients">
+                        {% for recipe_requirement in menu_item.reciperequirements_set.all %}
+                        <li>{{ recipe_requirement.quantity }} {{recipe_requirement.ingredient.unit }} {{ recipe_requirement.ingredient.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
+
+        </div>
   {% endblock %}

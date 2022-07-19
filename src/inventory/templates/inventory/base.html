@@ -21,11 +21,14 @@
     </div>
       <h3>Welcome to Cafe delicacy {{ user.username }}!</h3>
       <nav class="navbar">
+        {% url 'home' as home_url %}
         {% url 'ingredientlist' as ingredients_url %}
         {% url 'menulist' as menulist_url %}
         {% url 'recipelist' as recipelist_url %}
         {% url 'purchascreate' as purchascreate_url %}
         {% url 'purchaslist' as purchaslist_url %}
+           <a class="nav-item{% if request.path == home_url %} current-page {% endif %}" href="{% url 'home' %}"><p>Главная</p></a>
+
         <a class="nav-item{% if request.path == ingredients_url %} current-page {% endif %}" href="{% url 'ingredientlist' %}"><p>Ингредиенты</p></a>
         <a class="nav-item{% if request.path == menulist_url %} current-page {% endif %}" href="{% url 'menulist' %}"><p>Меню</p></a>
         <a class="nav-item{% if request.path == recipelist_url %} current-page {% endif %}" href="{% url 'recipelist' %}"><p>Рецепт</p></a>

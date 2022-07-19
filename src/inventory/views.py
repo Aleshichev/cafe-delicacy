@@ -2,13 +2,13 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from .models import Ingredients, MenuItems, RecipeRequirements, Purchases
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView,  DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import TemplateView
 from .forms import IngredientCreateForm, MenuItemsCreateForm, RecipeRequirementsForm, PurchasesForm, RegisterUserForm
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 
@@ -17,7 +17,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
   template_name = "inventory/home.html"
 
   def get_context_data(self, **kwargs):
-    # context = super().get_context_data(**kwargs)
+    context = super().get_context_data(**kwargs)
     context = {"name": "vegetable"}
     context["ingredients"] = Ingredients.objects.all()
     context["menu_items"] = MenuItems.objects.all()
@@ -35,14 +35,29 @@ class IngredientCreate(LoginRequiredMixin, CreateView):
   model = Ingredients
   template_name = 'inventory/ingredient_create_form.html'
   form_class = IngredientCreateForm
-#
-# class UpdateIngredientView(LoginRequiredMixin, UpdateView):
-#   template_name = "inventory/update_ingredient.html"
-#   model = Ingredient
-#   form_class = IngredientForm
+
+class UpdateIngredientView(LoginRequiredMixin, UpdateView):
+  template_name = "inventory/update_ingredient.html"
+  model = Ingredients
+  form_class = IngredientCreateForm
+
+  def get_success_url(self):
+    return reverse_lazy('ingredientlist')
+
+
+class DeleteIngredientView(LoginRequiredMixin, DeleteView):
+  model = Ingredients
+  template_name = 'inventory/delete_ingr.html'
+  success_url = reverse_lazy('ingredientlist')
+
 
 class MenuList(LoginRequiredMixin, ListView):
   model = MenuItems
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["menu_items"] = MenuItems.objects.all()
+    return context
 
 class MenuCreate(CreateView):
   model = MenuItems
@@ -85,6 +100,12 @@ class RegisterUser(CreateView):
   form_class = RegisterUserForm
   success_url = reverse_lazy("login")
   template_name = "registration/sign_up.html"
+
+  def form_valid(self, form):
+    """автоматически возвращает на главную страницу"""
+    user = form.save()
+    login(self.request, user)
+    return redirect('home')
 
 class LoginUser(LoginView):
   form_class = AuthenticationForm
