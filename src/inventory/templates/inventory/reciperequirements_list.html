@@ -12,11 +12,11 @@
   </tr>
   {% for recipe in reciperequirements_list %}
   <tr>
-      <td>{{ recipe.menuitem }}</td>
-      <td>{{ recipe.ingredient }}</td>
+      <td>{{ recipe.menuitem.titel }}</td>
+      <td>{{ recipe.ingredient.name }}</td>
       <td>{{ recipe.quantity }}</td>
-      <td><a href=""><button>Edit</button></a></td>
-      <td><a href=""><button>Delete</button></a></td>
+      <td><a href="{% url 'update_recipe' recipe.pk %}"><button>Обновить</button></a></td>
+      <td><a href="{% url 'recipedelete' recipe.pk %}"><button>Удалить</button></a></td>
   </tr>
   {% endfor %}
 </table>

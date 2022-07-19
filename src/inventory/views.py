@@ -18,7 +18,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context = {"name": "vegetable"}
     context["ingredients"] = Ingredients.objects.all()
     context["menu_items"] = MenuItems.objects.all()
     context["purchases"] = Purchases.objects.all()
@@ -71,6 +70,27 @@ class RecipeCreate(LoginRequiredMixin, CreateView):
   model = RecipeRequirements
   template_name = 'inventory/recipe_create_form.html'
   form_class = RecipeRequirementsForm
+
+
+class UpdateRecipeView(LoginRequiredMixin, UpdateView):
+  template_name = "inventory/update_recipe.html"
+  model = RecipeRequirements
+  form_class = RecipeRequirementsForm
+
+  def get_success_url(self):
+    return reverse_lazy('recipelist')
+
+
+class DeleteRecipeView(LoginRequiredMixin, DeleteView):
+  model = RecipeRequirements
+  template_name = 'inventory/delete_recipe.html'
+  success_url = reverse_lazy('recipelist')
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["ingredients"] = Ingredients.objects.all()
+    return context
+
 
 class PurchasesList(LoginRequiredMixin, ListView):
   model = Purchases

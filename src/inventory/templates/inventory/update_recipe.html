@@ -1,0 +1,10 @@
+{% extends 'inventory/base.html' %}
+{% load static %} 
+{% block content %}
+    <h2>Обновить ингридиент</h2>
+    <form method="post" class="flex-form">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Сохранить"/>
+    </form>
+{% endblock %}
