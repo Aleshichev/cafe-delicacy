@@ -6,10 +6,10 @@ from django.db import models
 
 # An inventory of different Ingredients, their available quantity, and their prices per unit
 class Ingredients(models.Model):
-  name = models.CharField(max_length=200, unique=True)
-  quantity = models.FloatField(default=0)
-  unit = models.CharField(max_length=20)
-  unit_price = models.FloatField(default=0)
+  name = models.CharField(max_length=200, unique=True, verbose_name='Название')
+  quantity = models.FloatField(default=0, verbose_name='Колличество')
+  unit = models.CharField(max_length=20, verbose_name='Единицы')
+  unit_price = models.FloatField(default=0, verbose_name='Цена')
 
   def get_absolute_url(self):
     return "list"
@@ -21,8 +21,8 @@ class Ingredients(models.Model):
 
 
 class MenuItems(models.Model):
-  titel = models.CharField(max_length=200, unique=True)
-  price = models.FloatField(default=0)
+  titel = models.CharField(max_length=200, unique=True, verbose_name='Название')
+  price = models.FloatField(default=0, verbose_name='Цена')
 
   def get_absolute_url(self):
     return "list"
@@ -37,9 +37,9 @@ class MenuItems(models.Model):
 
 
 class RecipeRequirements(models.Model):
-  menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
-  ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
-  quantity = models.FloatField(default=0)
+  menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE, verbose_name='Название пункта меню')
+  ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE, verbose_name='Ингредиент')
+  quantity = models.FloatField(default=0, verbose_name='Колличество')
 
   def get_absolute_url(self):
     return "list"
@@ -52,8 +52,8 @@ class RecipeRequirements(models.Model):
 # # A log of all Purchases made at the restaurant
 #
 class Purchases(models.Model):
-  menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE)
-  timestamp = models.DateTimeField(default=datetime.date.today)
+  menuitem = models.ForeignKey(MenuItems, on_delete=models.CASCADE, verbose_name='Блюдо')
+  timestamp = models.DateTimeField(default=datetime.date.today, verbose_name='Время')
 
   def get_absolute_url(self):
     return "list"

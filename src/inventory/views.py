@@ -115,6 +115,7 @@ class PurchasesCreate(LoginRequiredMixin, CreateView):
   model = Purchases
   template_name = 'inventory/purschase_create_form.html'
   form_class = PurchasesForm
+  success_url = reverse_lazy("menulist")
 
 class RegisterUser(CreateView):
   form_class = RegisterUserForm

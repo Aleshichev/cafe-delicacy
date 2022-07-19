@@ -10,7 +10,7 @@
                         <th>Наименование</th>
                         <th>Колличество</th>
                         <th>Единицы</th>
-                        <th>Цена</th>
+                        <th>Цена $</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         <td>{{ ingredient.name }}</td>
                         <td>{{ ingredient.quantity }}</td>
                         <td>{{ ingredient.unit }}</td>
-                        <td class="price">${{ ingredient.unit_price|stringformat:".2f" }}</td>
+                        <td class="price">{{ ingredient.unit_price|stringformat:".2f" }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -53,7 +53,7 @@
         <hr/>
 
         <div>
-            <h2>Menu</h2>
+            <h2>Меню</h2>
             <ul class="menu-items">
             {% for menu_item in menu_items %}
                 <li>
@@ -63,7 +63,7 @@
                     </div>
                     <ul class="menu-item-ingredients">
                         {% for recipe_requirement in menu_item.reciperequirements_set.all %}
-                        <li>{{ recipe_requirement.quantity }} {{recipe_requirement.ingredient.unit }} {{ recipe_requirement.ingredient.name }}</li>
+                        <li>{{ recipe_requirement.ingredient.name }}___{{ recipe_requirement.quantity }} {{recipe_requirement.ingredient.unit }}</li>
                         {% endfor %}
                     </ul>
                 </li>
