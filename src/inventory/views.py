@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.http import request
 from django.shortcuts import render, redirect
 from .models import Ingredients, MenuItems, RecipeRequirements, Purchases
 from django.views.generic import ListView
@@ -115,7 +116,21 @@ class PurchasesCreate(LoginRequiredMixin, CreateView):
   model = Purchases
   template_name = 'inventory/purschase_create_form.html'
   form_class = PurchasesForm
-  success_url = reverse_lazy("menulist")
+  # success_url = reverse_lazy("menulist")
+
+  def post(self, request):
+    menu_item_id = request.POST["menuitem"]
+    menu_item = MenuItems.objects.get(pk=menu_item_id)
+    requirements = menu_item.reciperequirements_set
+    purchase = Purchases(menuitem=menu_item)
+
+    for requirement in requirements.all():
+      required_ingredient = requirement.ingredient
+      required_ingredient.quantity -= requirement.quantity
+      required_ingredient.save()
+
+    purchase.save()
+    return redirect("/menu/list")
 
 class RegisterUser(CreateView):
   form_class = RegisterUserForm
@@ -132,8 +147,8 @@ class LoginUser(LoginView):
   form_class = AuthenticationForm
   template_name = "registration/login.html"
 
-  def get_success_url(self):
-    return reverse_lazy('home')
+  def get_success_url(self, ):
+      return reverse_lazy('menulist')
 
 def log_out(request):
   logout(request)

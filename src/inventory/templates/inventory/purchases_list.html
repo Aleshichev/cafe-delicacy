@@ -1,5 +1,11 @@
 {% extends './base.html' %}
 {% block content %}
+    <h2>Отчёт</h2>
+    <div style="color: green;">Общий доход: ${{ revenue|stringformat:".2f" }}</div>
+    <div style="color: red;">Общая стоимость: ${{ total_cost|stringformat:".2f" }}</div>
+    <div style="color: blue;">Общая прибыль: ${{ profit|stringformat:".2f" }}</div>
+ <hr/>
+<h2>Список заказов</h2>
 <table id="ingredient">
   <tr>
     <th>Меню</th>
@@ -14,9 +20,6 @@
   </tr>
   {% endfor %}
 </table>
-    <hr/>
-    <h2>Результат</h2>
-    <div style="color: green;">Общий доход: ${{ revenue|stringformat:".2f" }}</div>
-    <div style="color: red;">Общая стоимость: ${{ total_cost|stringformat:".2f" }}</div>
-    <div style="color: blue;">Общая прибыль: ${{ profit|stringformat:".2f" }}</div>
+
+
   {% endblock %}
